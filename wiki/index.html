@@ -189,6 +189,8 @@ Error message and password prompt
 
 <li>Kubernetes</li>
 
+<li>Renew Api Certificate</li>
+
 </ul>
 </p>
 
@@ -10115,7 +10117,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210715155005762" list="Home Kubernetes" modified="20210715155005762" title="$:/StoryList">
+<div created="20210715155005762" list="Home Kubernetes [[Renew Api Certificate]]" modified="20210715155030281" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20210715154905498" modified="20210715154912796" title="$:/theme">
@@ -10238,6 +10240,26 @@ Error message and password prompt
 </div>
 <div created="20210715155014523" modified="20210715155025977" title="Kubernetes">
 <pre>* [[Renew Api Certificate]]</pre>
+</div>
+<div created="20210715160436679" modified="20210715160607790" title="Renew Api Certificate">
+<pre>* `openssl x509 -in apiserver-kubelet-client.crt -text -noout|less`
+* `kubeadm alpha certs renew apiserver-kubelet-client --config=/root/kubeadm.yaml`
+* `cat apiserver-kubelet-client.key | base64 -w0 &gt; apiserver-kubelet-client.crt.base64`
+* `cat apiserver-kubelet-client.crt | base64 -w0 &gt; apiserver-kubelet-client.crt.base64`
+
+`
+  222  less apiserver-kubelet-client.key.base64
+  223  emacs /etc/kubernetes/kubelet.conf
+  224  less apiserver-kubelet-client.crt.base64
+  225  emacs /etc/kubernetes/kubelet.conf
+  226  systemctl stop kubelet
+  227  systemctl status kubelet
+  228  systemctl start kubelet
+  229  systemctl status kubelet
+  230  journalctl -u kubelet
+  231  systemctl status kubelet
+  232  journalctl -fu kubelet
+`</pre>
 </div>
 
 
