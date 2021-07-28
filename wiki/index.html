@@ -10679,7 +10679,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210715162650539" list="Home Kubernetes" modified="20210715163308114" title="$:/StoryList">
+<div created="20210728113708792" list="Home Kubernetes [[Renew Api Certificate]]" modified="20210728113711035" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20210715154905498" modified="20210715154912796" title="$:/theme">
@@ -10809,11 +10809,32 @@ Error message and password prompt
 <div created="20210715155014523" modified="20210715155025977" title="Kubernetes">
 <pre>* [[Renew Api Certificate]]</pre>
 </div>
-<div created="20210715160436679" modified="20210715161847083" title="Renew Api Certificate">
+<div created="20210715160436679" modified="20210728113924082" title="Renew Api Certificate">
 <pre>* `openssl x509 -in apiserver-kubelet-client.crt -text -noout|less`
 * `kubeadm alpha certs renew apiserver-kubelet-client --config=/root/kubeadm.yaml`
 * `cat apiserver-kubelet-client.key | base64 -w0 &gt; apiserver-kubelet-client.crt.base64`
 * `cat apiserver-kubelet-client.crt | base64 -w0 &gt; apiserver-kubelet-client.crt.base64`
+
+* ca.crt
+* apiserver-kubelet-client.crt
+* apiserver-kubelet-client.key
+* front-proxy-client.crt
+* front-proxy-client.key
+* apiserver.crt
+* apiserver.key
+
+`
+    - --client-ca-file=/etc/kubernetes/pki/ca.crt
+    - --etcd-cafile=/etc/kubernetes/pki/etcd_tls_ca.pem
+    - --etcd-certfile=/etc/kubernetes/pki/etcd_tls_cert.pem
+    - --etcd-keyfile=/etc/kubernetes/pki/etcd_tls_key.pem
+    - --kubelet-client-certificate=/etc/kubernetes/pki/apiserver-kubelet-client.crt
+    - --kubelet-client-key=/etc/kubernetes/pki/apiserver-kubelet-client.key
+    - --proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt
+    - --proxy-client-key-file=/etc/kubernetes/pki/front-proxy-client.key
+    - --tls-cert-file=/etc/kubernetes/pki/apiserver.crt
+    - --tls-private-key-file=/etc/kubernetes/pki/apiserver.key
+`
 
 `
   222  less apiserver-kubelet-client.key.base64
